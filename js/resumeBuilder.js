@@ -64,13 +64,13 @@ var projects = {
 			"title": "Project A",
 			"dates": 1991,
 			"description": "JavaSript typing",
-			"images": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON","http://www.copterlabs.com/json-what-it-is-how-it-works-how-to-use-it/"]
+			"images": ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk0iPJihKLJn06AVJtx3rUgBJDu456HSTdqn_N4Yd6EFdHKCx0','http://felixconstruction.com/wp-content/uploads/bb-plugin/cache/IMAG1156-300x169-circle.jpg']
 		},
 		{
 			"title": "Project B",
 			"dates": 1993,
 			"description": "JavaSript typing",
-			"images": ["https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiiyOO-laDMAhWG5KYKHfYUA7EQjRwIBw&url=https%3A%2F%2Fpixabay.com%2Fen%2Fbackground-image-colorful-art-967820%2F&psig=AFQjCNE-FqqeunyZmHUaNi64rF56QwCyJw&ust=1461343118053892"]
+			"images": ['images/197x148.gif']
 		}
 	]
 }
@@ -79,7 +79,7 @@ var education = {
 	"schools": [
 		{
 			"name": "Project B",
-			"city": 1993,
+			"city": "Melbourne",
 			"degree": "Masters",
 			"majors": ["CS"],
 			"dates": 1990,
@@ -87,7 +87,7 @@ var education = {
 		},
 		{
 			"name": "Project B",
-			"city": 1993,
+			"city": "Sydney",
 			"degree": "BA",
 			"majors": ["CS"],
 			"dates": 1991,
@@ -161,3 +161,48 @@ function displayWork() {
 	}
 }
 displayWork();
+
+function inName(name){
+	name = name.trim().split(" ");
+	console.log(name);
+	firstName = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+	lastName = name[1].toUpperCase();
+	return firstName +" "+ lastName;
+}
+
+$("#main").append(internationalizeButton);
+
+/*
+function inName() {
+    var array = bio.name.split(" "); 
+    array[array.length - 1] = array[array.length - 1].toUpperCase();     
+    for(var i = 0; i < (array.length - 1); i++) {
+        array[i] = array[i].slice(0,1).toUpperCase() + array[i].slice(1).toLowerCase();
+    }
+    var internationalName = array.join(" ");
+
+    return internationalName;
+}
+*/
+
+projects.display = function(){
+	for (project in projects.projects){
+		$("#projects").append(HTMLprojectStart);
+		var formattedProjectTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title);
+		$(".project-entry:last").append(formattedProjectTitle);
+		var formattedProjectDates = HTMLprojectDates.replace("%data%",projects.projects[project].dates);
+		$(".project-entry:last").append(formattedProjectDates);
+		var formattedProjectDescription = HTMLprojectDescription.replace("%data%",projects.projects[project].description);
+		$(".project-entry:last").append(formattedProjectDescription);
+		if (projects.projects[project].images.length > 0){
+			for (image in projects.projects[project].images){
+				var formattedImages = HTMLprojectImage.replace("%data%",projects.projects[project].images[image]);
+				$(".project-entry:last").append(formattedImages);
+			}
+		}
+	}
+}
+
+projects.display();
+
+$("#mapDiv").append(googleMap);
